@@ -174,7 +174,7 @@ public class BTNavigationDropdownMenu: UIView {
     private var isShown: Bool!
     private var menuWrapper: UIView!
     
-    required public init?(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -220,12 +220,12 @@ public class BTNavigationDropdownMenu: UIView {
         // Set up DropdownMenu
         self.menuWrapper = UIView(frame: CGRectMake(menuWrapperBounds.origin.x, 0, menuWrapperBounds.width, menuWrapperBounds.height))
         self.menuWrapper.clipsToBounds = true
-        self.menuWrapper.autoresizingMask = UIViewAutoresizing.FlexibleWidth.union(UIViewAutoresizing.FlexibleHeight)
+        self.menuWrapper.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         
         // Init background view (under table view)
         self.backgroundView = UIView(frame: menuWrapperBounds)
         self.backgroundView.backgroundColor = self.configuration.maskBackgroundColor
-        self.backgroundView.autoresizingMask = UIViewAutoresizing.FlexibleWidth.union(UIViewAutoresizing.FlexibleHeight)
+        self.backgroundView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
         
         // Init table view
         self.tableView = BTTableView(frame: CGRectMake(menuWrapperBounds.origin.x, menuWrapperBounds.origin.y + 0.5, menuWrapperBounds.width, menuWrapperBounds.height + 300), items: items, configuration: self.configuration)
@@ -254,7 +254,7 @@ public class BTNavigationDropdownMenu: UIView {
         self.menuWrapper.hidden = true
     }
     
-    public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    public override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if keyPath == "frame" {
             // Set up DropdownMenu
             self.menuWrapper.frame.origin.y = (self.navigationController?.navigationBar.frame.maxY)!
@@ -306,7 +306,7 @@ public class BTNavigationDropdownMenu: UIView {
             delay: 0,
             usingSpringWithDamping: 0.7,
             initialSpringVelocity: 0.5,
-            options: [],
+            options: nil,
             animations: {
                 self.tableView.frame.origin.y = CGFloat(-300)
                 self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
@@ -326,7 +326,7 @@ public class BTNavigationDropdownMenu: UIView {
             delay: 0,
             usingSpringWithDamping: 0.7,
             initialSpringVelocity: 0.5,
-            options: [],
+            options: nil,
             animations: {
                 self.tableView.frame.origin.y = CGFloat(-200)
             }, completion: nil
@@ -419,7 +419,7 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     private var items: [AnyObject]!
     private var selectedIndexPath: Int!
     
-    required init?(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -513,7 +513,7 @@ class BTTableViewCell: UITableViewCell {
         self.contentView.addSubview(separator)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -533,7 +533,7 @@ class BTTableCellContentView: UIView {
         self.initialize()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         self.initialize()
