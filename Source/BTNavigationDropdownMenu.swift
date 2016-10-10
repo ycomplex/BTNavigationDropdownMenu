@@ -603,8 +603,8 @@ class BTTableView: UITableView, UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor.clearColor();
         if self.configuration.shouldKeepSelectedCellColor == true {
-            cell.backgroundColor = self.configuration.cellBackgroundColor
             cell.contentView.backgroundColor = (indexPath.row == selectedIndexPath) ? self.configuration.cellSelectionColor : self.configuration.cellBackgroundColor
         }
     }
